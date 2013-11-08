@@ -3,19 +3,51 @@
 import os
 import sys
 import argparse # requires python 2.7
+import hashlib
 import gen_eq_hash_description
 import gen_case_classes
+from magic_utils import *
 
 DEFAULT_MACRO_EQUAL_HASH_BASE_NAME = 'MPGenerateIsEqualHash'
 DEFAULT_MACRO_DESCRIPTION_BASE_NAME = 'MPGenerateDescription'
 DEFAULT_MACRO_EQUAL_HASH_DESCRIPTION_BASE_NAME = 'MPGenerateIsEqualHashDescription'
 DEFAULT_EQ_HASH_DESCRIPTION_OUTFILE = 'MPEqHashDescription.h'
 
-def withDefault(default, val):
+def with_default(default, val):
     if val:
         return val
     else:
         return default
+
+def option_to_list(opt):
+    if opt is None:
+        return []
+    else:
+        return [opt]
+
+def input_info_file(dir):
+    return os.path.join(dir, '.magic-property')
+
+def load_input_info(dir):
+    path = input_info_file(dir)
+    if os.path.exists(path):
+        s = open(path).read()
+        return s
+    else:
+        return None
+
+def store_input_info(dir, info):
+    f = open(input_info_file(dir), 'w')
+    f.write(info)
+    f.close()
+
+def mk_input_info(args, files):
+    m = hashlib.md5()
+    m.update(str(args))
+    for x in files:
+        if x and os.path.exists(x):
+            m.update(open(x).read())
+    return m.hexdigest()
 
 def main(argv):
     parser = argparse.ArgumentParser(prog='magic-property',
@@ -27,6 +59,9 @@ def main(argv):
     parser.add_argument('--no-arc', required=False, action='store_const',
                         default=False, const=True,
                         help='generate code without ARC support')
+    parser.add_argument('--force', required=False, action='store_const',
+                        default=False, const=True,
+                        help='force code generation')
     parser.add_argument('--custom-ints', metavar='FILE', required=False, nargs=1,
                         help='file with custom integer types (newline separated)')
     parser.add_argument('--enums', metavar='FILE', required=False, nargs=1,
@@ -55,26 +90,39 @@ def main(argv):
     enum_file = None
     if args.enums:
         enum_file = args.enums[0]
-    eq_hash_header = withDefault(DEFAULT_EQ_HASH_DESCRIPTION_OUTFILE,
-                                 args.eq_hash_description_outfile)
+    custom_ints = None
+    if args.custom_ints:
+        custom_ints = args.custom_ints[0]
+    # check whether we have something to do
+    old_input_info = load_input_info(output_dir)
+    in_files = [x for x in args.files] + option_to_list(enum_file) + \
+        option_to_list(custom_ints)
+    new_input_info = mk_input_info(args, in_files)
+    if old_input_info == new_input_info and not args.force:
+        info("All input files unchanged, nothing to do")
+        sys.exit(0)
+    var = 'MAGIC_PROPERTY_ERROR_IF_CHANGES'
+    if os.getenv(var) == '1':
+        abort('environment variable ' + var + ' set, exiting because old_input_info=' +
+              old_input_info + ' but new_input_info=' + new_input_info)
+    store_input_info(output_dir, new_input_info)
+    eq_hash_header = with_default(DEFAULT_EQ_HASH_DESCRIPTION_OUTFILE,
+                                  args.eq_hash_description_outfile)
     eq_hash_out = os.path.join(output_dir, eq_hash_header)
-    eq_hash_macro_name = withDefault(DEFAULT_MACRO_EQUAL_HASH_BASE_NAME,
-                                    args.eq_hash_macro_base_name)
+    eq_hash_macro_name = with_default(DEFAULT_MACRO_EQUAL_HASH_BASE_NAME,
+                                      args.eq_hash_macro_base_name)
     gen_eq_hash_description.gencode(
         useArc=(not args.no_arc),
         outfile=eq_hash_out,
         eqHashMacroName=eq_hash_macro_name,
-        descriptionMacroName=withDefault(DEFAULT_MACRO_DESCRIPTION_BASE_NAME,
-                                         args.description_macro_base_name),
-        eqHashDescriptionMacroName=withDefault(DEFAULT_MACRO_EQUAL_HASH_DESCRIPTION_BASE_NAME,
-                                               args.eq_hash_description_macro_base_name))
+        descriptionMacroName=with_default(DEFAULT_MACRO_DESCRIPTION_BASE_NAME,
+                                          args.description_macro_base_name),
+        eqHashDescriptionMacroName=with_default(DEFAULT_MACRO_EQUAL_HASH_DESCRIPTION_BASE_NAME,
+                                                args.eq_hash_description_macro_base_name))
     if not args.only_eq_hash_description:
         if not args.files:
             print 'No input files given'
             sys.exit(1)
-        custom_ints = None
-        if args.custom_ints:
-            custom_ints = args.custom_ints[0]
         gen_case_classes.gencode(args.files, output_dir, enum_file, eq_hash_header,
                                  eq_hash_macro_name, custom_ints)
 
