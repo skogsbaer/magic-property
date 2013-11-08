@@ -72,8 +72,11 @@ def main(argv):
         if not args.files:
             print 'No input files given'
             sys.exit(1)
+        custom_ints = None
+        if args.custom_ints:
+            custom_ints = args.custom_ints[0]
         gen_case_classes.gencode(args.files, output_dir, enum_file, eq_hash_header,
-                                 eq_hash_macro_name, args.custom_ints)
+                                 eq_hash_macro_name, custom_ints)
 
 if __name__ == '__main__':
     main(sys.argv)

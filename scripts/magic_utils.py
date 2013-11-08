@@ -1,3 +1,5 @@
+import sys
+
 def info(msg):
     print "[INFO] " + msg
 

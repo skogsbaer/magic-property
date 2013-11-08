@@ -4,6 +4,10 @@ id doWork() {
     return [Foo p4Default];
 }
 
+@interface MPIntegerMyCustomInt : MPInteger
+@end
+
+
 @implementation Foo
 
 - (NSObject<MyObserver> *)p4Default {
@@ -18,4 +22,7 @@ id doWork() {
 + (NSObject<MyObserver> *)p4Default {
     return nil;
 }
+@end
+
+@implementation MPIntegerMyCustomInt
 @end

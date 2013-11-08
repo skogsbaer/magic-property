@@ -197,10 +197,14 @@ prop_regex = re.compile(r'^@property\s*%s%s%s\s*;\s*$' % (prop_opts_regex,
 impl_regex = re.compile(r'@implementation\s+(?P<iface_name>\w+)')
 anon_ext_regex = re.compile(r'@interface\s+(?P<iface_name>\w+)\s*\(\)')
 
-def match_line(loc, line, regex, prefix, what, orig_line=None):
+def match_line(loc, line, regex, prefix, what, orig_line=None, anti_pattern=None):
     if orig_line is None:
         orig_line = line
     if line.startswith(prefix):
+        if anti_pattern:
+            anti_m = anti_pattern.match(line)
+            if anti_m:
+                return None
         m = regex.match(line)
         if m is None:
             abort('%s: Invalid %s\n%s' % (loc, what, orig_line))
@@ -251,7 +255,8 @@ def parse_prop_line(loc, orig_line):
 def parse_impl_line(loc, line):
     m = match_line(loc, line, impl_regex, '@implementation', 'implementation definition')
     if m is None:
-        m = match_line(loc, line, anon_ext_regex, '@interface', 'anonymous extension definition')
+        m = match_line(loc, line, anon_ext_regex, '@interface', 'anonymous extension definition',
+                       anti_pattern=iface_regex)
         if m is None:
             return None
         is_ext = True
@@ -300,6 +305,7 @@ def parse_m_file(m, lines):
     impls = []
     current_impl = None
     pre_lines = []
+    after = False
     loc = Location(m, 0)
     for line in lines:
         loc = loc.next_line()
@@ -549,7 +555,17 @@ def gencode_for_file(h, m_opt, output_dir, eq_hash_descr_header, eq_hash_descr_m
         ext_opt = find_impl(True)
         impl_opt = find_impl(False)
         m_content += gen_impl_def(iface, ext_opt, impl_opt, eq_hash_descr_macro) + '\n'
+    more_code = ''
+    for impl in impls:
+        has_iface = False
+        for iface in ifaces:
+            if impl.name == iface.name:
+                has_iface = True
+        if not has_iface:
+            lines = impl.pre_lines + impl.lines
+            more_code += '\n'.join(lines)
     h_content += '\n'.join(h_post_lines)
+    m_content += more_code + '\n'.join(m_post_lines)
     genfile(h_content, mk_outfile_name(h, output_dir, '.h'))
     genfile(m_content, mk_outfile_name(h, output_dir, '.m'))
 
@@ -640,7 +656,7 @@ def gencode(input_files, output_dir, enum_file,
         m = replace_ext(h, '.m')
         has_m = m in mFiles
         if has_m:
-            code_for = "%s/%s" % (h, m)
+            code_for = "%s and %s" % (h, m)
         else:
             code_for = h
         info("Generating code for " + code_for)
