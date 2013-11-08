@@ -7,9 +7,8 @@
 //
 
 #import "EqHashDescriptionGenerator.h"
-#import "FRCommon.h"
 
-@implementation FRObject
+@implementation MPObject
 + (BOOL)is:(id)o1 equalTo:(id)o2 {
     if (o1 == nil && o2 == nil) {
         return YES;
@@ -25,7 +24,7 @@
 }
 @end
 
-@implementation FRIdentity
+@implementation MPIdentity
 + (BOOL)is:(id)o1 equalTo:(id)o2 {
     return (o1 == o2);
 }
@@ -37,7 +36,7 @@
 }
 @end
 
-@implementation FRData
+@implementation MPData
 + (BOOL)is:(NSData *)o1 equalTo:(NSData *)o2 {
     if (o1 == nil && o2 == nil) {
         return YES;
@@ -53,14 +52,14 @@
 }
 @end
 
-@implementation FRRect
+@implementation MPRect
 + (BOOL)is:(CGRect)o1 equalTo:(CGRect)o2 {
     return CGRectEqualToRect(o1, o2);
 }
 + (NSUInteger)hashOf:(CGRect)o {
     NSUInteger result = 17;
-    result = 37 * result + [FRPoint hashOf:o.origin];
-    result = 37 * result + [FRSize hashOf:o.size];
+    result = 37 * result + [MPPoint hashOf:o.origin];
+    result = 37 * result + [MPSize hashOf:o.size];
     return result;
 }
 + (NSString *)descriptionOf:(CGRect)o {
@@ -72,7 +71,7 @@
 }
 @end
 
-@implementation FRSize
+@implementation MPSize
 + (BOOL)is:(CGSize)o1 equalTo:(CGSize)o2 {
     return CGSizeEqualToSize(o1, o2);
 }
@@ -91,7 +90,7 @@
 }
 @end
 
-@implementation FRPoint
+@implementation MPPoint
 + (BOOL)is:(CGPoint)o1 equalTo:(CGPoint)o2 {
     return CGPointEqualToPoint(o1, o2);
 }
@@ -110,7 +109,7 @@
 }
 @end
 
-@implementation FRString
+@implementation MPString
 + (BOOL)is:(NSString *)o1 equalTo:(NSString *)o2 {
     if (o1 == nil && o2 == nil) {
         return YES;
@@ -126,7 +125,7 @@
 }
 @end
 
-@implementation FRInteger
+@implementation MPInteger
 + (BOOL)is:(NSInteger)i1 equalTo:(NSInteger)i2 {
     return (i1 == i2);
 }
@@ -138,7 +137,7 @@
 }
 @end
 
-@implementation FRUInteger
+@implementation MPUInteger
 + (BOOL)is:(NSUInteger)i1 equalTo:(NSUInteger)i2 {
     return (i1 == i2);
 }
@@ -150,7 +149,7 @@
 }
 @end
 
-@implementation FRInteger64 : NSObject
+@implementation MPInteger64 : NSObject
 + (BOOL)is:(int64_t)i1 equalTo:(int64_t)i2
 {
     return (i1 == i2);
@@ -165,7 +164,7 @@
 }
 @end
 
-@implementation FRUInteger64 : NSObject
+@implementation MPUInteger64 : NSObject
 + (BOOL)is:(uint64_t)i1 equalTo:(uint64_t)i2
 {
     return (i1 == i2);
@@ -180,7 +179,7 @@
 }
 @end
 
-@implementation FRBool
+@implementation MPBool
 + (BOOL)is:(BOOL)b1 equalTo:(BOOL)b2 {
     return (b1 == b2);
 }
@@ -192,7 +191,7 @@
 }
 @end
 
-@implementation FRDouble
+@implementation MPDouble
 + (BOOL)is:(double)d1 equalTo:(double)d2 {
     return (d1 == d2);
 }
@@ -204,7 +203,7 @@
 }
 @end
 
-@implementation FRSelector
+@implementation MPSelector
 + (BOOL)is:(SEL)sel1 equalTo:(SEL)sel2 {
     if (sel1 == sel2) {
         return YES;

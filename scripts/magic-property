@@ -1,0 +1,79 @@
+#!/usr/bin/python
+
+import os
+import sys
+import argparse # requires python 2.7
+import gen_eq_hash_description
+import gen_case_classes
+
+DEFAULT_MACRO_EQUAL_HASH_BASE_NAME = 'MPGenerateIsEqualHash'
+DEFAULT_MACRO_DESCRIPTION_BASE_NAME = 'MPGenerateDescription'
+DEFAULT_MACRO_EQUAL_HASH_DESCRIPTION_BASE_NAME = 'MPGenerateIsEqualHashDescription'
+DEFAULT_EQ_HASH_DESCRIPTION_OUTFILE = 'MPEqHashDescription.h'
+
+def withDefault(default, val):
+    if val:
+        return val
+    else:
+        return default
+
+def main(argv):
+    parser = argparse.ArgumentParser(prog='magic-property',
+                                     description='Objective-C data records made easy')
+    parser.add_argument('files', metavar='INPUT_FILE', nargs='*',
+                        help='input files for case-class generation (.h and .m files)')
+    parser.add_argument('-o', '--output-dir', metavar='DIR', required=True, nargs=1,
+                        help='output directory')
+    parser.add_argument('--no-arc', required=False, action='store_const',
+                        default=False, const=True,
+                        help='generate code without ARC support')
+    parser.add_argument('--custom-ints', metavar='FILE', required=False, nargs=1,
+                        help='file with custom integer types (newline separated)')
+    parser.add_argument('--enums', metavar='FILE', required=False, nargs=1,
+                        help='file with enum definitions')
+    parser.add_argument('--only-eq-hash-description', required=False,
+                        action='store_const', const=True, default=False,
+                        help='generate only the IsEqualHashDescription macros')
+    parser.add_argument('--eq-hash-description-outfile', metavar='FILE', required=False,
+                        nargs=1,
+                        help=('output file for the IsEqualHashDescription macros, default: ' +
+                             DEFAULT_EQ_HASH_DESCRIPTION_OUTFILE))
+    parser.add_argument('--eq-hash-macro-base-name', metavar='NAME', required=False, nargs=1,
+                        help=('basename for the IsEqualHash macro, default: ' +
+                              DEFAULT_MACRO_EQUAL_HASH_BASE_NAME))
+    parser.add_argument('--description-macro-base-name', metavar='NAME', required=False, nargs=1,
+                        help=('basename for the Description macro, default: ' +
+                              DEFAULT_MACRO_DESCRIPTION_BASE_NAME))
+    parser.add_argument('--eq-hash-description-macro-base-name', metavar='NAME',
+                        required=False, nargs=1,
+                        help=('basename for the IsEqualHashDescription macro, default: ' +
+                              DEFAULT_MACRO_EQUAL_HASH_DESCRIPTION_BASE_NAME))
+    args = parser.parse_args(argv[1:])
+    output_dir = args.output_dir[0]
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    enum_file = None
+    if args.enums:
+        enum_file = args.enums[0]
+    eq_hash_header = withDefault(DEFAULT_EQ_HASH_DESCRIPTION_OUTFILE,
+                                 args.eq_hash_description_outfile)
+    eq_hash_out = os.path.join(output_dir, eq_hash_header)
+    eq_hash_macro_name = withDefault(DEFAULT_MACRO_EQUAL_HASH_BASE_NAME,
+                                    args.eq_hash_macro_base_name)
+    gen_eq_hash_description.gencode(
+        useArc=(not args.no_arc),
+        outfile=eq_hash_out,
+        eqHashMacroName=eq_hash_macro_name,
+        descriptionMacroName=withDefault(DEFAULT_MACRO_DESCRIPTION_BASE_NAME,
+                                         args.description_macro_base_name),
+        eqHashDescriptionMacroName=withDefault(DEFAULT_MACRO_EQUAL_HASH_DESCRIPTION_BASE_NAME,
+                                               args.eq_hash_description_macro_base_name))
+    if not args.only_eq_hash_description:
+        if not args.files:
+            print 'No input files given'
+            sys.exit(1)
+        gen_case_classes.gencode(args.files, output_dir, enum_file, eq_hash_header,
+                                 eq_hash_macro_name, args.custom_ints)
+
+if __name__ == '__main__':
+    main(sys.argv)
