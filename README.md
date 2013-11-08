@@ -95,8 +95,11 @@ magic-property script, generated code folder and input folder.
 
 ### Step 4: Add generated files ###
 
-Build your project once. The build will generate the necessary files in the
-output folder. Add these files to your XCode project. Note that this step has to
-be repeated every time you add a new property class.
+Add the files from the objective-c folder to your project. Build your project
+once. The build will generate all the necessary files from your property class
+headers. Add the generated headers and implementation files to your XCode
+project. Note that you have to add the files again for each new property class
+header file you create, but not if you change the contents of a property header
+file.
 
 ![Add files](screenshot_addfiles.png "Add files")
