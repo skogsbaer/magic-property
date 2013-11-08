@@ -5,9 +5,8 @@
 #
 # Author: Stefan Wehr
 
-MACRO_EQUAL_HASH_BASE_NAME = 'MPGenerateIsEqualHash'
-MACRO_DESCRIPTION_BASE_NAME = 'MPGenerateDescription'
-MACRO_EQUAL_HASH_DESCRIPTION_BASE_NAME = 'MPGenerateIsEqualHashDescription'
+from magic_utils import *
+
 MAX_ARGS = 40
 
 def mangle(s):
@@ -91,20 +90,23 @@ def codeForDescription(n, useArc):
               '}']
     return prefix + indent(2, stmts) + suffix
 
-def code(n, useArc):
+def code(n, useArc,
+         eqHashMacroName,
+         descriptionMacroName,
+         eqHashDescriptionMacroName):
     args = []
     for i in range(0,n):
         args.append(fieldType(i))
         args.append(fieldName(i))
     args = ','.join(args)
-    header1 = ['#define %s%d(%s,%s)' % (MACRO_EQUAL_HASH_BASE_NAME, n, CLASS, args)]
-    header2 = ['#define %s%d(%s)' % (MACRO_DESCRIPTION_BASE_NAME, n, args)]
+    header1 = ['#define %s%d(%s,%s)' % (eqHashMacroName, n, CLASS, args)]
+    header2 = ['#define %s%d(%s)' % (descriptionMacroName, n, args)]
     header3 = ['#define %s%d(%s,%s)' % \
-                   (MACRO_EQUAL_HASH_DESCRIPTION_BASE_NAME, n, CLASS, args)]
+                   (eqHashDescriptionMacroName, n, CLASS, args)]
     c1 = indent(2, codeForIsEqual(n)) + indent(2, codeForHash(n))
     c2 = indent(2, codeForDescription(n, useArc))
-    c3 = ['  %s%d(%s,%s)' % (MACRO_EQUAL_HASH_BASE_NAME, n, CLASS, args),
-          '  %s%d(%s)' % (MACRO_DESCRIPTION_BASE_NAME, n, args)]
+    c3 = ['  %s%d(%s,%s)' % (eqHashMacroName, n, CLASS, args),
+          '  %s%d(%s)' % (descriptionMacroName, n, args)]
     return (flattenCode(header1 + c1) + '\n' + flattenCode(header2 + c2) + '\n' +
             flattenCode(header3 + c3))
 
@@ -114,14 +116,15 @@ def indent(n, l):
 def flattenCode(l):
     return ' \\\n'.join(l)
 
-def gen(useArc):
+def gencode(useArc, outfile, eqHashMacroName,
+            descriptionMacroName,
+            eqHashDescriptionMacroName):
+    info("Generating EqHashDescription macros in file " + outfile)
+    f = open(outfile, 'w')
     for i in range(1, MAX_ARGS+1):
-        print code(i, useArc)
-        print
-
-if __name__ == '__main__':
-    print '#if __has_feature(objc_arc)'
-    gen(useArc=True)
-    print '#else'
-    gen(useArc=False)
-    print '#endif'
+        f.write(code(i, useArc, eqHashMacroName,
+                     descriptionMacroName,
+                     eqHashDescriptionMacroName))
+        f.write('\n\n')
+    f.close()
+    info("Done generating EqHashDescription macros")
