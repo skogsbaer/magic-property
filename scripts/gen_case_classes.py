@@ -28,12 +28,12 @@ from magic_utils import *
 
 DOUBLE_TYPES = ['double', 'float', 'NSTimeInterval', 'CGFloat']
 
-INT_TYPES = {'int': 'FRInteger',
-             'long': 'FRInteger',
-             'NSInteger': 'FRInteger',
-             'NSUInteger': 'FRUInteger',
-             'long long': 'FRInteger64',
-             'uint64_t': 'FRUInteger64'}
+INT_TYPES = {'int': 'MPInteger',
+             'long': 'MPInteger',
+             'NSInteger': 'MPInteger',
+             'NSUInteger': 'MPUInteger',
+             'long long': 'MPInteger64',
+             'uint64_t': 'MPUInteger64'}
 
 globalCustomIntTypes = []
 
@@ -146,17 +146,17 @@ class Property(CommonEqualityMixin):
         return 'use_coder'
     def fr_type(self):
         t = self.typ
-        if t == 'SEL': return 'FRSelector'
-        if t in DOUBLE_TYPES: return 'FRDouble'
+        if t == 'SEL': return 'MPSelector'
+        if t in DOUBLE_TYPES: return 'MPDouble'
         if INT_TYPES.has_key(t): return INT_TYPES[t]
-        if t in globalCustomIntTypes: return 'FRInteger' + t
-        if t == 'BOOL': return 'FRBool'
-        if t == 'CGPoint': return 'FRPoint'
-        if t == 'CGRect': return 'FRRect'
-        if t == 'CGSize': return 'FRSize'
-        if is_pointer_type(t, 'NSString'): return 'FRString'
-        if is_pointer_type(t, 'NSData'): return 'FRData'
-        return 'FRObject'
+        if t in globalCustomIntTypes: return 'MPInteger' + t
+        if t == 'BOOL': return 'MPBool'
+        if t == 'CGPoint': return 'MPPoint'
+        if t == 'CGRect': return 'MPRect'
+        if t == 'CGSize': return 'MPSize'
+        if is_pointer_type(t, 'NSString'): return 'MPString'
+        if is_pointer_type(t, 'NSData'): return 'MPData'
+        return 'MPObject'
     def check(self):
         if 'readwrite' not in self.opts and 'readonly' not in self.opts:
             abort('%s: Property %s must be declared as "readwrite" or "readonly"' % (self.loc, self.name))
@@ -496,7 +496,7 @@ def gen_iface_def(iface, eq_hash_descr_macro):
 
     # find @interface line
     for x in range(0, len(lines) - 1):
-        if (lines[x].startswith("@interface") and (not lines[x].startswith("@interface FRInteger"))) and (len(iface.props) > 0):
+        if (lines[x].startswith("@interface") and (not lines[x].startswith("@interface MPInteger"))) and (len(iface.props) > 0):
             lines[x] = '@interface ' + iface.name + ' : ' + iface.baseClass
 
             allProtos = iface.protocols + add
@@ -536,7 +536,7 @@ def gencode_for_file(h, m_opt, output_dir, eq_hash_descr_header, eq_hash_descr_m
         impls = []
         m_post_lines = []
     h_content = ''
-    m_imports = [os.path.basename(h), eq_hash_descr_header]
+    m_imports = [os.path.basename(h), eq_hash_descr_header, 'MPEqHashDescriptionGenerator.h']
     m_content = ''.join(['#import "%s"\n' % x for x in m_imports])
     for iface in ifaces:
         iface.check()
@@ -597,7 +597,7 @@ NSString *stringFrom${enum.name}(${enum.name} x)
         default: return [NSString stringWithFormat:@"Unknown${enum.name}(%d)", x];
     }
 }
-@implementation FRInteger${enum.name}
+@implementation MPInteger${enum.name}
 + (NSString *)descriptionOf:(NSInteger)i {
     return stringFrom${enum.name}(i);
 }

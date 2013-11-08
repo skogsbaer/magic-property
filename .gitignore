@@ -1,3 +1,7 @@
+# Custom
+tests/out
+
+# Python
 *.py[cod]
 
 # C extensions
