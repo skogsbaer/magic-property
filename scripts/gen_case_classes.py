@@ -620,9 +620,9 @@ NSString *stringFrom${enum.name}(${enum.name} x)
 @end
 """)
 
-def gencode_for_enums(output_dir, enum_file, eq_hash_descr_header):
+def gencode_for_enums(output_dir, enum_file):
     enums = load_enums(enum_file)
-    h_content = '#import <Foundation/Foundation.h>\n#import "' + eq_hash_descr_header + '"\n'
+    h_content = '#import <Foundation/Foundation.h>\n#import "MPEqHashDescriptionGenerator.h"\n'
     h_name = replace_ext(os.path.basename(enum_file), '.h')
     m_content = '#import "' + h_name + '"\n'
     for e in enums:
@@ -638,8 +638,7 @@ def gencode(input_files, output_dir, enum_file,
             eq_hash_descr_header, eq_hash_descr_macro,
             custom_ints_file):
     if enum_file:
-        enums = gencode_for_enums(output_dir, enum_file,
-                                  eq_hash_descr_header)
+        enums = gencode_for_enums(output_dir, enum_file)
     else:
         enums = []
     global globalCustomIntTypes
