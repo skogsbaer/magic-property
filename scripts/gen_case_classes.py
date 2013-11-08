@@ -621,6 +621,7 @@ NSString *stringFrom${enum.name}(${enum.name} x)
 """)
 
 def gencode_for_enums(output_dir, enum_file):
+    info("Generating code for enumerations in " + enum_file)
     enums = load_enums(enum_file)
     h_content = '#import <Foundation/Foundation.h>\n#import "MPEqHashDescriptionGenerator.h"\n'
     h_name = replace_ext(os.path.basename(enum_file), '.h')
@@ -632,6 +633,7 @@ def gencode_for_enums(output_dir, enum_file):
         m_content += '\n'
     genfile(h_content, mk_outfile_name(enum_file, output_dir, '.h'))
     genfile(m_content, mk_outfile_name(enum_file, output_dir, '.m'))
+    info("Done generating code for enumerations")
     return [e.name for e in enums]
 
 def gencode(input_files, output_dir, enum_file,
