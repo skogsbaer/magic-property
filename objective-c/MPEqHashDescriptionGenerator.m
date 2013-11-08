@@ -6,7 +6,7 @@
 //  Copyright 2010 factis research GmbH. All rights reserved.
 //
 
-#import "EqHashDescriptionGenerator.h"
+#import "MPEqHashDescriptionGenerator.h"
 
 @implementation MPObject
 + (BOOL)is:(id)o1 equalTo:(id)o2 {
@@ -63,11 +63,7 @@
     return result;
 }
 + (NSString *)descriptionOf:(CGRect)o {
-#if TARGET_IOS
     return NSStringFromCGRect(o);
-#else
-    return NSStringFromRect(o);
-#endif
 }
 @end
 
@@ -82,11 +78,7 @@
     return result;
 }
 + (NSString *)descriptionOf:(CGSize)o {
-#if TARGET_IOS
     return NSStringFromCGSize(o);
-#else
-    return NSStringFromSize(o);
-#endif
 }
 @end
 
@@ -101,11 +93,7 @@
     return result;
 }
 + (NSString *)descriptionOf:(CGPoint)o {
-#if TARGET_IOS
     return NSStringFromCGPoint(o);
-#else
-    return NSStringFromPoint(o);
-#endif
 }
 @end
 

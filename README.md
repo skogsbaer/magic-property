@@ -4,7 +4,7 @@ magic-property
 *Objective-C data records made easy.*
 
 magic-property generates immutable Objective-C classes with init, copy, isEqual and hash
-methods from a simple header file.
+methods from a simple header file with just a list of properties.
 
 Features
 --------
@@ -17,7 +17,7 @@ Features
  * NSCoding and NSCopying supported
  * support for extra method implementations and custom property setters and
    accessors
- * support for custom typedefs
+ * support for custom typedefs and enums
  * no special compiler features needed
 
 Usage
@@ -63,17 +63,43 @@ need to manually add any of the generated methods.
 @end
 ```
 
-Integration
+XCode Integration
 ------------
 
-### Step 1 ###
+magic-property can be used as standalone script but XCode integration can be setup with these simple steps:
 
-Add script
+### Step 1: Copy magic-property script ###
 
-### Step 2 ###
+Copy the scripts folder to your project.
 
-Script build phase
+### Step 2: Create folder and property files ###
 
-### Step 3 ###
+Create a folder where the generated code will be placed (e.g. gen) and a folder
+where all your property header files will go (e.g. property-classes). Add the
+property header files (*.h) you want to use with magic-property
 
-Add files to Project
+### Step 3: Add the script as a build phase ###
+
+Add a "Run script" build phase to XCode.
+![Add build target](screenshot_buildtarget.png "Add build target")
+
+Make sure the script build phase is before compiling sources and add the
+following code:
+```
+scripts/magic-property -o gen property-classes/*.h property-classes/*.m
+```
+Make sure to change the paths to the correct location you chose for the
+magic-property script, generated code folder and input folder.
+
+![Script](screenshot_script.png "Add script")
+
+### Step 4: Add generated files ###
+
+Add the files from the objective-c folder to your project. Build your project
+once. The build will generate all the necessary files from your property class
+headers. Add the generated headers and implementation files to your XCode
+project. Note that you have to add the files again for each new property class
+header file you create, but not if you change the contents of a property header
+file.
+
+![Add files](screenshot_addfiles.png "Add files")
