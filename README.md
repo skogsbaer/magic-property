@@ -97,6 +97,6 @@ magic-property script, generated code folder and input folder.
 
 Build your project once. The build will generate the necessary files in the
 output folder. Add these files to your XCode project. Note that this step has to
-be repeated everytime you add a new property file.
+be repeated every time you add a new property class.
 
-![Add files](screenshot_add.png "Add files")
+![Add files](screenshot_addfiles.png "Add files")
