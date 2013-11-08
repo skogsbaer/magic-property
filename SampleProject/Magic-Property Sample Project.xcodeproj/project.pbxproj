@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FBA8B754182D083A00755CAD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA8B753182D083A00755CAD /* Foundation.framework */; };
+		FBA8B756182D083A00755CAD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA8B755182D083A00755CAD /* CoreGraphics.framework */; };
+		FBA8B758182D083A00755CAD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA8B757182D083A00755CAD /* UIKit.framework */; };
+		FBA8B75E182D083A00755CAD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBA8B75C182D083A00755CAD /* InfoPlist.strings */; };
+		FBA8B760182D083A00755CAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8B75F182D083A00755CAD /* main.m */; };
+		FBA8B764182D083A00755CAD /* MPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8B763182D083A00755CAD /* MPAppDelegate.m */; };
+		FBA8B766182D083A00755CAD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBA8B765182D083A00755CAD /* Images.xcassets */; };
+		FBA8B76D182D083A00755CAD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA8B76C182D083A00755CAD /* XCTest.framework */; };
+		FBA8B76E182D083A00755CAD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA8B753182D083A00755CAD /* Foundation.framework */; };
+		FBA8B76F182D083A00755CAD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA8B757182D083A00755CAD /* UIKit.framework */; };
+		FBA8B777182D083A00755CAD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FBA8B775182D083A00755CAD /* InfoPlist.strings */; };
+		FBA8B779182D083A00755CAD /* Magic_Property_Sample_ProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8B778182D083A00755CAD /* Magic_Property_Sample_ProjectTests.m */; };
+		FBFE9275182D3144005AEA63 /* PhonebookEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFE9274182D3144005AEA63 /* PhonebookEntry.m */; };
+		FBFE9278182D3203005AEA63 /* MPEqHashDescriptionGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFE9277182D3203005AEA63 /* MPEqHashDescriptionGenerator.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FBA8B770182D083A00755CAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FBA8B748182D083A00755CAD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBA8B74F182D083A00755CAD;
+			remoteInfo = "Magic-Property Sample Project";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FBA8B750182D083A00755CAD /* Magic-Property Sample Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Magic-Property Sample Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBA8B753182D083A00755CAD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FBA8B755182D083A00755CAD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FBA8B757182D083A00755CAD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FBA8B75B182D083A00755CAD /* Magic-Property Sample Project-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Magic-Property Sample Project-Info.plist"; sourceTree = "<group>"; };
+		FBA8B75D182D083A00755CAD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FBA8B75F182D083A00755CAD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FBA8B761182D083A00755CAD /* Magic-Property Sample Project-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Magic-Property Sample Project-Prefix.pch"; sourceTree = "<group>"; };
+		FBA8B762182D083A00755CAD /* MPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPAppDelegate.h; sourceTree = "<group>"; };
+		FBA8B763182D083A00755CAD /* MPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPAppDelegate.m; sourceTree = "<group>"; };
+		FBA8B765182D083A00755CAD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FBA8B76B182D083A00755CAD /* Magic-Property Sample ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Magic-Property Sample ProjectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBA8B76C182D083A00755CAD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FBA8B774182D083A00755CAD /* Magic-Property Sample ProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Magic-Property Sample ProjectTests-Info.plist"; sourceTree = "<group>"; };
+		FBA8B776182D083A00755CAD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FBA8B778182D083A00755CAD /* Magic_Property_Sample_ProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Magic_Property_Sample_ProjectTests.m; sourceTree = "<group>"; };
+		FBFE9272182D3144005AEA63 /* MPEqHashDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPEqHashDescription.h; path = gen/MPEqHashDescription.h; sourceTree = SOURCE_ROOT; };
+		FBFE9273182D3144005AEA63 /* PhonebookEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhonebookEntry.h; path = gen/PhonebookEntry.h; sourceTree = SOURCE_ROOT; };
+		FBFE9274182D3144005AEA63 /* PhonebookEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhonebookEntry.m; path = gen/PhonebookEntry.m; sourceTree = SOURCE_ROOT; };
+		FBFE9276182D3203005AEA63 /* MPEqHashDescriptionGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPEqHashDescriptionGenerator.h; path = "../../objective-c/MPEqHashDescriptionGenerator.h"; sourceTree = "<group>"; };
+		FBFE9277182D3203005AEA63 /* MPEqHashDescriptionGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPEqHashDescriptionGenerator.m; path = "../../objective-c/MPEqHashDescriptionGenerator.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FBA8B74D182D083A00755CAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBA8B756182D083A00755CAD /* CoreGraphics.framework in Frameworks */,
+				FBA8B758182D083A00755CAD /* UIKit.framework in Frameworks */,
+				FBA8B754182D083A00755CAD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBA8B768182D083A00755CAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBA8B76D182D083A00755CAD /* XCTest.framework in Frameworks */,
+				FBA8B76F182D083A00755CAD /* UIKit.framework in Frameworks */,
+				FBA8B76E182D083A00755CAD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FBA8B747182D083A00755CAD = {
+			isa = PBXGroup;
+			children = (
+				FBA8B759182D083A00755CAD /* Magic-Property Sample Project */,
+				FBA8B772182D083A00755CAD /* Magic-Property Sample ProjectTests */,
+				FBA8B752182D083A00755CAD /* Frameworks */,
+				FBA8B751182D083A00755CAD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FBA8B751182D083A00755CAD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FBA8B750182D083A00755CAD /* Magic-Property Sample Project.app */,
+				FBA8B76B182D083A00755CAD /* Magic-Property Sample ProjectTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FBA8B752182D083A00755CAD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FBA8B753182D083A00755CAD /* Foundation.framework */,
+				FBA8B755182D083A00755CAD /* CoreGraphics.framework */,
+				FBA8B757182D083A00755CAD /* UIKit.framework */,
+				FBA8B76C182D083A00755CAD /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FBA8B759182D083A00755CAD /* Magic-Property Sample Project */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE9276182D3203005AEA63 /* MPEqHashDescriptionGenerator.h */,
+				FBFE9277182D3203005AEA63 /* MPEqHashDescriptionGenerator.m */,
+				FBFE9271182D3137005AEA63 /* Gencode */,
+				FBA8B762182D083A00755CAD /* MPAppDelegate.h */,
+				FBA8B763182D083A00755CAD /* MPAppDelegate.m */,
+				FBA8B765182D083A00755CAD /* Images.xcassets */,
+				FBA8B75A182D083A00755CAD /* Supporting Files */,
+			);
+			path = "Magic-Property Sample Project";
+			sourceTree = "<group>";
+		};
+		FBA8B75A182D083A00755CAD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FBA8B75B182D083A00755CAD /* Magic-Property Sample Project-Info.plist */,
+				FBA8B75C182D083A00755CAD /* InfoPlist.strings */,
+				FBA8B75F182D083A00755CAD /* main.m */,
+				FBA8B761182D083A00755CAD /* Magic-Property Sample Project-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FBA8B772182D083A00755CAD /* Magic-Property Sample ProjectTests */ = {
+			isa = PBXGroup;
+			children = (
+				FBA8B778182D083A00755CAD /* Magic_Property_Sample_ProjectTests.m */,
+				FBA8B773182D083A00755CAD /* Supporting Files */,
+			);
+			path = "Magic-Property Sample ProjectTests";
+			sourceTree = "<group>";
+		};
+		FBA8B773182D083A00755CAD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FBA8B774182D083A00755CAD /* Magic-Property Sample ProjectTests-Info.plist */,
+				FBA8B775182D083A00755CAD /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FBFE9271182D3137005AEA63 /* Gencode */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE9272182D3144005AEA63 /* MPEqHashDescription.h */,
+				FBFE9273182D3144005AEA63 /* PhonebookEntry.h */,
+				FBFE9274182D3144005AEA63 /* PhonebookEntry.m */,
+			);
+			name = Gencode;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FBA8B74F182D083A00755CAD /* Magic-Property Sample Project */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBA8B77C182D083A00755CAD /* Build configuration list for PBXNativeTarget "Magic-Property Sample Project" */;
+			buildPhases = (
+				FBFE9270182D2778005AEA63 /* ShellScript */,
+				FBA8B74C182D083A00755CAD /* Sources */,
+				FBA8B74D182D083A00755CAD /* Frameworks */,
+				FBA8B74E182D083A00755CAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Magic-Property Sample Project";
+			productName = "Magic-Property Sample Project";
+			productReference = FBA8B750182D083A00755CAD /* Magic-Property Sample Project.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FBA8B76A182D083A00755CAD /* Magic-Property Sample ProjectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBA8B77F182D083A00755CAD /* Build configuration list for PBXNativeTarget "Magic-Property Sample ProjectTests" */;
+			buildPhases = (
+				FBA8B767182D083A00755CAD /* Sources */,
+				FBA8B768182D083A00755CAD /* Frameworks */,
+				FBA8B769182D083A00755CAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FBA8B771182D083A00755CAD /* PBXTargetDependency */,
+			);
+			name = "Magic-Property Sample ProjectTests";
+			productName = "Magic-Property Sample ProjectTests";
+			productReference = FBA8B76B182D083A00755CAD /* Magic-Property Sample ProjectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FBA8B748182D083A00755CAD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MP;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "factisresearch GmbH";
+				TargetAttributes = {
+					FBA8B76A182D083A00755CAD = {
+						TestTargetID = FBA8B74F182D083A00755CAD;
+					};
+				};
+			};
+			buildConfigurationList = FBA8B74B182D083A00755CAD /* Build configuration list for PBXProject "Magic-Property Sample Project" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FBA8B747182D083A00755CAD;
+			productRefGroup = FBA8B751182D083A00755CAD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FBA8B74F182D083A00755CAD /* Magic-Property Sample Project */,
+				FBA8B76A182D083A00755CAD /* Magic-Property Sample ProjectTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FBA8B74E182D083A00755CAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBA8B75E182D083A00755CAD /* InfoPlist.strings in Resources */,
+				FBA8B766182D083A00755CAD /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBA8B769182D083A00755CAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBA8B777182D083A00755CAD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FBFE9270182D2778005AEA63 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "../scripts/magic-property -o gen property-classes/*.h property-classes/*.m";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FBA8B74C182D083A00755CAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBA8B760182D083A00755CAD /* main.m in Sources */,
+				FBFE9275182D3144005AEA63 /* PhonebookEntry.m in Sources */,
+				FBA8B764182D083A00755CAD /* MPAppDelegate.m in Sources */,
+				FBFE9278182D3203005AEA63 /* MPEqHashDescriptionGenerator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBA8B767182D083A00755CAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBA8B779182D083A00755CAD /* Magic_Property_Sample_ProjectTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FBA8B771182D083A00755CAD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBA8B74F182D083A00755CAD /* Magic-Property Sample Project */;
+			targetProxy = FBA8B770182D083A00755CAD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FBA8B75C182D083A00755CAD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBA8B75D182D083A00755CAD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FBA8B775182D083A00755CAD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBA8B776182D083A00755CAD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FBA8B77A182D083A00755CAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FBA8B77B182D083A00755CAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FBA8B77D182D083A00755CAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Magic-Property Sample Project/Magic-Property Sample Project-Prefix.pch";
+				INFOPLIST_FILE = "Magic-Property Sample Project/Magic-Property Sample Project-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FBA8B77E182D083A00755CAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Magic-Property Sample Project/Magic-Property Sample Project-Prefix.pch";
+				INFOPLIST_FILE = "Magic-Property Sample Project/Magic-Property Sample Project-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FBA8B780182D083A00755CAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Magic-Property Sample Project.app/Magic-Property Sample Project";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Magic-Property Sample Project/Magic-Property Sample Project-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Magic-Property Sample ProjectTests/Magic-Property Sample ProjectTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FBA8B781182D083A00755CAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Magic-Property Sample Project.app/Magic-Property Sample Project";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Magic-Property Sample Project/Magic-Property Sample Project-Prefix.pch";
+				INFOPLIST_FILE = "Magic-Property Sample ProjectTests/Magic-Property Sample ProjectTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FBA8B74B182D083A00755CAD /* Build configuration list for PBXProject "Magic-Property Sample Project" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBA8B77A182D083A00755CAD /* Debug */,
+				FBA8B77B182D083A00755CAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBA8B77C182D083A00755CAD /* Build configuration list for PBXNativeTarget "Magic-Property Sample Project" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBA8B77D182D083A00755CAD /* Debug */,
+				FBA8B77E182D083A00755CAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBA8B77F182D083A00755CAD /* Build configuration list for PBXNativeTarget "Magic-Property Sample ProjectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBA8B780182D083A00755CAD /* Debug */,
+				FBA8B781182D083A00755CAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FBA8B748182D083A00755CAD /* Project object */;
+}
