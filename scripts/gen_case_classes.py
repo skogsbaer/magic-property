@@ -106,6 +106,8 @@ class Property(CommonEqualityMixin):
         return 'readonly' in self.opts
     def is_read_write(self):
         return not self.is_read_only()
+    def is_copy(self):
+        return 'copy' in self.opts
     def mk_writeable(self):
         opts = [x for x in self.opts if x != 'readonly']
         if 'readwrite' not in opts:
@@ -345,7 +347,11 @@ impl_template = airspeed.Template("""
 - (id)initWith${init_params} {
     if ((self = [super init])) {
 #foreach ($p in $props)
+  #if (${p.is_copy()})
+        self->_${p.name} = [${p.name_param()} copy];
+  #else
         self->_${p.name} = ${p.name_param()};
+  #end
 #end
     }
     return self;
