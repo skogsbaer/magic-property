@@ -67,7 +67,11 @@ class Interface(CommonEqualityMixin):
     def check(self):
         for p in self.props:
             p.check()
+    def useNSSecureCoding(self):
+        return "NSSecureCoding" in self.protocols
     def canNSCoding(self):
+        if self.useNSSecureCoding():
+            return True
         for p in self.props:
             if p.nsCodingTarget() == 'no_serialize':
                 return False
@@ -96,6 +100,7 @@ class Property(CommonEqualityMixin):
         self.loc = loc
         self.opts = opts
         self.typ = typ
+        self.base_type = re.sub(r'\s*\*', '', typ)
         self.name = name
         self.has_def = has_def
         self.def_val = def_val
@@ -131,8 +136,6 @@ class Property(CommonEqualityMixin):
         return '__' + self.name
     def nsCodingTarget(self):
         t = self.typ
-        if is_pointer_type(t, 'NSString'): return 'Object'
-        if is_pointer_type(t, 'NSData'): return 'Object'
         if t == 'NSInteger': return 'Integer'
         if t == 'NSUInteger': return 'Integer'
         if t == 'int': return 'Integer'
@@ -417,7 +420,7 @@ impl_template = airspeed.Template("""
 - (void)encodeWithCoder:(NSCoder*)encoder {
 #foreach ($p in $props)
    #if (${p.nsCodingTarget()} == 'use_coder')
-   [encoder encodeObject:[NSKeyedArchiver archivedDataWithRootObject:self->_${p.name}] forKey:@"${p.name}"];
+   [encoder encodeObject:self->_${p.name} forKey:@"${p.name}"];
    #else
    [encoder encode${p.nsCodingTarget()}:self->_${p.name} forKey:@"${p.name}"];
    #end
@@ -426,16 +429,27 @@ impl_template = airspeed.Template("""
 
 - (id) initWithCoder:(NSCoder*)decoder {
     if (self = [super init]) {
-    #foreach ($p in $props)
-      #if (${p.nsCodingTarget()} == 'use_coder')
-      self->_${p.name} = [NSKeyedUnarchiver unarchiveObjectWithData:[decoder decodeObjectForKey:@"${p.name}"]];
-      #else
-      self->_${p.name} = [decoder decode${p.nsCodingTarget()}ForKey:@"${p.name}"];
+#foreach ($p in $props)
+  #if (${p.nsCodingTarget()} == 'use_coder')
+    #if (${nssecurecoding})
+        self->_${p.name} = [decoder decodeObjectOfClass:[${p.base_type} class] forKey:@"${p.name}"];
+    #else
+        self->_${p.name} = [decoder decodeObjectForKey:@"${p.name}"];
     #end
-    #end
+  #else
+        self->_${p.name} = [decoder decode${p.nsCodingTarget()}ForKey:@"${p.name}"];
+  #end
+#end
     }
     return self;
 }
+
+#if (${nssecurecoding})
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+#end
 #end
 
 ${eq_hash_descr_macro}${props_len}($name,#foreach ($p in $props)
@@ -470,6 +484,7 @@ def tmpl_args(iface, eq_hash_descr_macro):
             'init_default_params': init_default_params,
             'init_args': init_args,
             'nscoding': iface.canNSCoding(),
+            'nssecurecoding': iface.useNSSecureCoding(),
             'has_defaults': len(def_props) < len(iface.props)}
 
 def gen_impl_def(iface, ext_opt, impl_opt, eq_hash_descr_macro):
@@ -495,7 +510,7 @@ def gen_iface_def(iface, eq_hash_descr_macro):
         extra_content = ''
     lines = iface.pre_lines + iface.lines[:-1] + [extra_content, iface.lines[-1]]
     add = ["NSCopying"]
-    if iface.canNSCoding():
+    if iface.canNSCoding() and not iface.useNSSecureCoding():
         add = add + ["NSCoding"]
     else:
         warn("Can't generate NSCoding for " + iface.name)
