@@ -14,7 +14,7 @@ Features
  * `description` method with human-readable output
  * all property attributes (e.g. nonatomic, strong) supported
  * ARC support
- * NSCoding and NSCopying support
+ * NSCopying, NSCoding and NSSecureCoding support
  * support for extra method implementations and custom property setters and
    accessors
  * support for custom typedefs and enums
